@@ -1,38 +1,28 @@
 package com.example.sptest;
 
-import android.view.Menu;
-import android.view.MenuItem;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
-import com.example.sptest.adapters.NewsAdapter;
-import com.example.sptest.entity.News;
-import com.example.sptest.utils.RandomDataUtil;
 import com.google.android.material.tabs.TabLayout;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     /* 导航栏全局变量 */
-    private int[] unSelectTabRes = new int[]{R.drawable.unread_normal
-            , R.drawable.have_read_normal};
-    private int[] selectTabRes = new int[]{R.drawable.unread_press, R.drawable.have_read_press};
-    private String[] title = {"全部", "已读"};
+    private int[] unSelectTabRes = new int[]{
+            R.drawable.unread_normal,
+            R.drawable.have_read_normal,
+            R.drawable.allread_normal};
+    private int[] selectTabRes = new int[]{
+            R.drawable.unread_press,
+            R.drawable.have_read_press,
+            R.drawable.allread_press};
+
+    private String[] title = {"未读", "已读", "全部"};
     private ViewPager viewPager;
     private TabLayout tabLayout;
-    private TabLayout.Tab tabAtOne;
-    private TabLayout.Tab tabAttwo;
 
     private void initView() {
         viewPager = findViewById(R.id.viewpager_content_view);
@@ -85,8 +75,12 @@ public class MainActivity extends AppCompatActivity {
         }
         @Override
         public Fragment getItem(int position) {
+
+            //TODO ViewPager打开第 1 个fragment时会打开第 2 个 fragment，尝试只在其可见时加载（懒加载）
             if (position == 1) {
                 return new SecondFragment();
+            } else if (position == 2) {
+                return new ThirdFragment();
             }
 
             return new FristFragment();

@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.sptest.R;
 import com.example.sptest.SecondActivity;
+import com.example.sptest.component.NewsListManage;
 import com.example.sptest.dto.SPInteractive;
 import com.example.sptest.entity.News;
 
@@ -24,8 +25,10 @@ public class ReadNewsAdapter extends RecyclerView.Adapter<ReadNewsAdapter.ViewHo
 
     private List<News> mReadNewsList;
 
-    public ReadNewsAdapter(List<News> newsList) {
-        mReadNewsList = newsList;
+    private NewsListManage newsListManage = NewsListManage.getInstance();
+
+    public ReadNewsAdapter() {
+        mReadNewsList = newsListManage.getHavereadNewsList();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
