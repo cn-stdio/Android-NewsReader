@@ -25,21 +25,13 @@ import java.util.List;
  */
 public class NewsFragment extends Fragment {
 
-    private List<News> newsList = new ArrayList<>();
     private NewsAdapter adapter = null;
     private RecyclerView recyclerView = null;
-
-    private NewsListManage newsListManage = NewsListManage.getInstance();
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        Log.d("MyLog", "2：onCreate");
-
-        newsList = newsListManage.getNewsList();
-
         View view = inflater.inflate(R.layout.news_fragment, null);
-
         recyclerView = view.findViewById(R.id.news_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -50,7 +42,6 @@ public class NewsFragment extends Fragment {
         recyclerView.addItemDecoration(mDivider);
 
         adapter = new NewsAdapter();
-        recyclerView.setAdapter(adapter);
 
         return view;
     }
@@ -58,13 +49,8 @@ public class NewsFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Log.d("MyLog", "2：onStart");
+
         recyclerView.setAdapter(adapter);
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.d("MyLog", "2：onDestroyView");
-    }
 }

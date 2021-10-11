@@ -2,6 +2,7 @@ package com.example.sptest.dto;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import com.example.sptest.component.NewsListManage;
 import com.example.sptest.constant.NewsConstant;
 import com.example.sptest.entity.News;
 
@@ -78,6 +79,8 @@ public class SPInteractive {
             return (T) sharedPreferences.getString(contentKey, (String) defaultValue);
         } else if (defaultValue instanceof Set) {
             return (T) sharedPreferences.getStringSet(contentKey, (Set<String>) defaultValue);
+        } else if (defaultValue instanceof Integer) {
+            return (T) (Integer) sharedPreferences.getInt(contentKey, (Integer) defaultValue);
         }
 
         return null;
@@ -113,35 +116,53 @@ public class SPInteractive {
     }
 
     /**
-     * 保存已读新闻
+     * 保存已读新闻列表
+     * @param context 活动上下文
+     */
+    public static void saveHaveReadNewsList(Context context) {
+        SharedPreferences.Editor editor = getSPObject(context, NEWS_GROUP_KEY);
+
+        NewsListManage newsListManage = NewsListManage.getInstance();
+        List<News> haveNewsList = newsListManage.getHavereadNewsList();
+
+        Set<String> strList = new HashSet<>();
+        for (News news : haveNewsList) {
+            strList.add(news.getNewsId());
+        }
+
+        editor.putStringSet(NewsConstant.READ_NEWS_LIST_KEY, strList);
+
+        editor.commit();
+    }
+
+    /**
+     * 将特定新闻保存进已读新闻列表
      * @param context 活动上下文
      * @param news 想要保存的新闻
      */
     public static void saveHaveReadNews(Context context, News news) {
-        saveData(context, NewsConstant.READ_NEWS_TITLE_KEY, news.getTitle());
-        saveData(context, NewsConstant.READ_NEWS_CONTENT_KEY, news.getContent());
+        saveStringToSet(context, news.getNewsId(), NEWS_GROUP_KEY, NewsConstant.READ_NEWS_LIST_KEY, new HashSet<>());
     }
 
     /**
-     * 取出已读新闻
+     * 取出已读新闻列表并清空SP
      * @param context 活动上下文
-     * @return 返回一个字符串数组，数组第一位为已读新闻标题，第二位为已读新闻内容
+     * @return 返回已读新闻集合
      */
-    public static String[] getHaveReadNews(Context context) {
-        String[] readNewsStrs = new String[2];
+    public static Set<String> getHaveReadNews(Context context) {
+        Set<String> readNewsSet = getContent(context, NEWS_GROUP_KEY, NewsConstant.READ_NEWS_LIST_KEY, new HashSet<>());
+        clearHaveReadNews(context);
 
-        readNewsStrs[0] = getContent(context, NEWS_GROUP_KEY, NewsConstant.READ_NEWS_TITLE_KEY, NewsConstant.READ_NEWS_CONTENT_VALUE_DEFAULT);
-        readNewsStrs[1] = getContent(context, NEWS_GROUP_KEY, NewsConstant.READ_NEWS_CONTENT_KEY, NewsConstant.READ_NEWS_CONTENT_VALUE_DEFAULT);
-
-        return readNewsStrs;
+        return readNewsSet;
     }
 
     /**
-     * 清除SP中储存的已读新闻
+     * 清除SP
      * @param context 活动上下文
      */
     public static void clearHaveReadNews(Context context) {
-        saveData(context, NewsConstant.READ_NEWS_TITLE_KEY, "");
-        saveData(context, NewsConstant.READ_NEWS_CONTENT_KEY, "");
+        SharedPreferences.Editor editor = getSPObject(context, NEWS_GROUP_KEY);
+
+        editor.clear();
     }
 }

@@ -15,10 +15,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.sptest.adapters.UnreadNewsAdapter;
 import com.example.sptest.component.NewsListManage;
+import com.example.sptest.dto.SPInteractive;
 import com.example.sptest.entity.News;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Seaguller
@@ -33,22 +35,9 @@ public class UnreadNewsFragment extends Fragment {
 
     private NewsListManage newsListManage = NewsListManage.getInstance();
 
-    /**
-     * 碎片与活动建立关联，调用一次，负责进入活动的初始化
-     * @param context
-     */
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-
-        newsListManage.init();
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        Log.d("MyLog", "0：onCreate");
-
         View view = inflater.inflate(R.layout.unread_news_fragment, null);
 
         recyclerView = view.findViewById(R.id.unread_news_list);
@@ -68,14 +57,8 @@ public class UnreadNewsFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Log.d("MyLog", "0：onStart");
-        recyclerView.setAdapter(adapter);
-    }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.d("MyLog", "0：onDestroyView");
+        recyclerView.setAdapter(adapter);
     }
 
 }

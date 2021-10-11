@@ -33,12 +33,8 @@ public class ReadNewsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        Log.d("MyLog", "1：onCreate");
-
         View view = inflater.inflate(R.layout.read_news_fragment, null);
         globalView = view;
-
-        SPInteractive.clearHaveReadNews(view.getContext());
 
         RecyclerView recyclerView = view.findViewById(R.id.read_news_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
@@ -61,13 +57,7 @@ public class ReadNewsFragment extends Fragment {
         ReadNewsAdapter adapter = new ReadNewsAdapter();
         globalRecyclerView.setAdapter(adapter);
 
-        Log.d("MyLog", "1：onStart");
 
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.d("MyLog", "1：onDestroyView");
-    }
 }

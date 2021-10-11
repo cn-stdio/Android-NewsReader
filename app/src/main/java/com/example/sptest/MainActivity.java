@@ -1,12 +1,21 @@
 package com.example.sptest;
 
+import android.content.Context;
+import android.util.Log;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+import com.example.sptest.component.NewsListManage;
+import com.example.sptest.dto.SPInteractive;
+import com.example.sptest.entity.News;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.List;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private String[] title = {"未读", "已读", "全部"};
     private ViewPager viewPager;
     private TabLayout tabLayout;
+
+    NewsListManage newsListManage = NewsListManage.getInstance();
 
     private void initView() {
         viewPager = findViewById(R.id.viewpager_content_view);
@@ -104,6 +115,33 @@ public class MainActivity extends AppCompatActivity {
         initData();
         initListener();
 
+        List<News> newsList = newsListManage.getNewsList();
+        if (newsList == null) {
+            newsListManage.init();
+            newsList = newsListManage.getNewsList();
+
+            Set<String> readNewsSet = SPInteractive.getHaveReadNews(getApplication());
+
+            for (String newsId : readNewsSet) {
+                int nId = Integer.valueOf(newsId);
+
+                News news = newsList.get(nId);
+                newsListManage.newsBecomesRead(news);
+            }
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SPInteractive.saveHaveReadNewsList(getApplication());
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        SPInteractive.saveHaveReadNewsList(getApplication());
     }
 
     /*@Override

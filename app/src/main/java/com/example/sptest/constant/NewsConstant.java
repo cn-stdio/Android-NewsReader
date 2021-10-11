@@ -46,5 +46,10 @@ public class NewsConstant {
      */
     public static final String READ_NEWS_CONTENT_VALUE_DEFAULT = "";
 
+    /**
+     * 已读新闻列表储存键值
+     */
+    public static final String READ_NEWS_LIST_KEY = "readNewsList";
+
     /* ********************************************************************************************* */
 }

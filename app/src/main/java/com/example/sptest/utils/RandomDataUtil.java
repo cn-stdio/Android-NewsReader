@@ -22,7 +22,7 @@ public class RandomDataUtil {
 
         List<News> newsList = new ArrayList<>();
         for(int i = 0; i < count; i++) {
-            News news = new News();
+            News news = new News(String.valueOf(i));
 
             news.setTitle("第 " + (i+1) + " 个新闻标题");
 

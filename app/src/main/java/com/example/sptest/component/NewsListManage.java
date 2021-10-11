@@ -42,6 +42,10 @@ public class NewsListManage {
     }
 
     public List<News> getNewsList() {
+        if (newsList.isEmpty()) {
+            return null;
+        }
+
         return newsList;
     }
 
