@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.sptest.R;
 import com.example.sptest.NewsShowActivity;
 import com.example.sptest.component.NewsListManage;
+import com.example.sptest.constant.NewsConstant;
 import com.example.sptest.dto.SPInteractive;
 import com.example.sptest.entity.News;
 
@@ -60,8 +61,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             /* 新闻阅读检查 */
             newsReadChecking(viewHolder, news);
 
-            SPInteractive.saveNewsContent(view.getContext(), news.getContent());
             Intent intent = new Intent(v.getContext(), NewsShowActivity.class);
+            intent.putExtra(NewsConstant.NEWS_CONTENT_KEY, news.getContent());
             v.getContext().startActivity(intent);
         });
 

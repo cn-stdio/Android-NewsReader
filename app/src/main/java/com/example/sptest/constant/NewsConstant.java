@@ -17,6 +17,11 @@ public class NewsConstant {
     public static final String NEWS_CONTENT_KEY = "newsContent";
 
     /**
+     * 新闻点击位置键值
+     */
+    public static final String NEWS_CLICK_POSITION_KEY = "newsClickPosition";
+
+    /**
      * 新闻内容存储默认值
      */
     public static final String NEWS_CONTENT_VALUE_DEFAULT = "";
