@@ -35,7 +35,7 @@ public class ReadNewsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         Log.d("MyLog", "1：onCreate");
 
-        View view = inflater.inflate(R.layout.fragment_second, null);
+        View view = inflater.inflate(R.layout.read_news_fragment, null);
         globalView = view;
 
         SPInteractive.clearHaveReadNews(view.getContext());

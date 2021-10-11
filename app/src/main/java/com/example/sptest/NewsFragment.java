@@ -1,12 +1,10 @@
 package com.example.sptest;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
@@ -16,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.sptest.adapters.NewsAdapter;
 import com.example.sptest.component.NewsListManage;
 import com.example.sptest.entity.News;
-import com.example.sptest.utils.RandomDataUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +38,7 @@ public class NewsFragment extends Fragment {
 
         newsList = newsListManage.getNewsList();
 
-        View view = inflater.inflate(R.layout.fragment_third, null);
+        View view = inflater.inflate(R.layout.news_fragment, null);
 
         recyclerView = view.findViewById(R.id.news_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());

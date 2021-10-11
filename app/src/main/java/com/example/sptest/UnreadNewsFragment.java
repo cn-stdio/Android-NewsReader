@@ -13,12 +13,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.sptest.adapters.NewsAdapter;
 import com.example.sptest.adapters.UnreadNewsAdapter;
 import com.example.sptest.component.NewsListManage;
-import com.example.sptest.dto.SPInteractive;
 import com.example.sptest.entity.News;
-import com.example.sptest.utils.RandomDataUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +49,7 @@ public class UnreadNewsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         Log.d("MyLog", "0：onCreate");
 
-        View view = inflater.inflate(R.layout.fragment_first, null);
+        View view = inflater.inflate(R.layout.unread_news_fragment, null);
 
         recyclerView = view.findViewById(R.id.unread_news_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
