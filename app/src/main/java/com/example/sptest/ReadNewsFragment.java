@@ -1,49 +1,46 @@
 package com.example.sptest;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.sptest.adapters.NewsAdapter;
-import com.example.sptest.component.NewsListManage;
+import com.example.sptest.adapters.ReadNewsAdapter;
+import com.example.sptest.dto.SPInteractive;
 import com.example.sptest.entity.News;
-import com.example.sptest.utils.RandomDataUtil;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Seaguller
- * @date 2021/10/8 14:14
+ * @date 2021/9/27 10:50
  * @Description
  */
-public class ThirdFragment extends Fragment {
+public class ReadNewsFragment extends Fragment {
 
-    private List<News> newsList = new ArrayList<>();
-    private NewsAdapter adapter = null;
-    private RecyclerView recyclerView = null;
+    private List<News> readNewsList = new ArrayList<>();
 
-    private NewsListManage newsListManage = NewsListManage.getInstance();
+    private View globalView;
+
+    private RecyclerView globalRecyclerView;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        Log.d("MyLog", "2：onCreate");
+        Log.d("MyLog", "1：onCreate");
 
-        newsList = newsListManage.getNewsList();
+        View view = inflater.inflate(R.layout.fragment_second, null);
+        globalView = view;
 
-        View view = inflater.inflate(R.layout.fragment_third, null);
+        SPInteractive.clearHaveReadNews(view.getContext());
 
-        recyclerView = view.findViewById(R.id.news_list);
+        RecyclerView recyclerView = view.findViewById(R.id.read_news_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
 
@@ -52,8 +49,7 @@ public class ThirdFragment extends Fragment {
         mDivider.setDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.spilit_divider, null));
         recyclerView.addItemDecoration(mDivider);
 
-        adapter = new NewsAdapter();
-        recyclerView.setAdapter(adapter);
+        globalRecyclerView = recyclerView;
 
         return view;
     }
@@ -61,13 +57,17 @@ public class ThirdFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Log.d("MyLog", "2：onStart");
-        recyclerView.setAdapter(adapter);
+
+        ReadNewsAdapter adapter = new ReadNewsAdapter();
+        globalRecyclerView.setAdapter(adapter);
+
+        Log.d("MyLog", "1：onStart");
+
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Log.d("MyLog", "2：onDestroyView");
+        Log.d("MyLog", "1：onDestroyView");
     }
 }

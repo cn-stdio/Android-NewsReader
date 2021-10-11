@@ -78,12 +78,12 @@ public class MainActivity extends AppCompatActivity {
 
             //TODO ViewPager打开第 1 个fragment时会打开第 2 个 fragment，尝试只在其可见时加载（懒加载）
             if (position == 1) {
-                return new SecondFragment();
+                return new ReadNewsFragment();
             } else if (position == 2) {
-                return new ThirdFragment();
+                return new NewsFragment();
             }
 
-            return new FristFragment();
+            return new UnreadNewsFragment();
         }
         @Override
         public int getCount() {

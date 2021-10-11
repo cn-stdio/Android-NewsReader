@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.sptest.R;
-import com.example.sptest.SecondActivity;
+import com.example.sptest.NewsShowActivity;
 import com.example.sptest.component.NewsListManage;
 import com.example.sptest.dto.SPInteractive;
 import com.example.sptest.entity.News;
@@ -58,7 +58,7 @@ public class ReadNewsAdapter extends RecyclerView.Adapter<ReadNewsAdapter.ViewHo
             News news = mReadNewsList.get(position);
 
             SPInteractive.saveNewsContent(view.getContext(), news.getContent());
-            Intent intent = new Intent(v.getContext(), SecondActivity.class);
+            Intent intent = new Intent(v.getContext(), NewsShowActivity.class);
             v.getContext().startActivity(intent);
         });
 

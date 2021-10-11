@@ -28,7 +28,7 @@ import java.util.List;
  * @date 2021/9/27 10:47
  * @Description
  */
-public class FristFragment extends Fragment {
+public class UnreadNewsFragment extends Fragment {
 
     private List<News> unreadNewsList = new ArrayList<>();
     private UnreadNewsAdapter adapter = null;

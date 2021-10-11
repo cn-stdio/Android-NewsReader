@@ -10,7 +10,7 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.SPTest">
 
-        <activity android:name=".SecondActivity">
+        <activity android:name=".NewsShowActivity">
         </activity>
 
         <activity android:name=".MainActivity"

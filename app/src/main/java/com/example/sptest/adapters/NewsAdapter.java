@@ -1,24 +1,18 @@
 package com.example.sptest.adapters;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.sptest.MainActivity;
 import com.example.sptest.R;
-import com.example.sptest.SecondActivity;
+import com.example.sptest.NewsShowActivity;
 import com.example.sptest.component.NewsListManage;
 import com.example.sptest.dto.SPInteractive;
 import com.example.sptest.entity.News;
-import com.example.sptest.utils.ImageChangeUtil;
 
 import java.util.List;
 
@@ -67,7 +61,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             newsReadChecking(viewHolder, news);
 
             SPInteractive.saveNewsContent(view.getContext(), news.getContent());
-            Intent intent = new Intent(v.getContext(), SecondActivity.class);
+            Intent intent = new Intent(v.getContext(), NewsShowActivity.class);
             v.getContext().startActivity(intent);
         });
 
